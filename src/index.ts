@@ -16,5 +16,14 @@ import { Box } from "./Box";
 // document.body.appendChild(component());
 
 const main = new Main();
-const box = new Box({ size: {width: 220, height: 50}, pos: {x: 150, y: 50}});
+const box = new Box({
+  rect: { size: {width: 220, height: 80}, pos: {x: 50, y: 50}},
+  color: '#3aa'
+});
 main.addWidget(box);
+
+const box2 = new Box({
+  rect: { size: {width: 220, height: 80}, pos: {x: 50, y: 150}},
+  color: '#a3a'
+});
+main.addWidget(box2);
