@@ -1,8 +1,17 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.ts',
+  entry: {
+    app: './src/index.ts',
+    print: './src/print.ts',
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'WebPlay'
+    })
+  ],
   module: {
     rules: [
       {
@@ -16,7 +25,7 @@ module.exports = {
     extensions: [ '.tsx', '.ts', '.js' ],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-  }
+  },
 }
