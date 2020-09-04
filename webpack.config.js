@@ -10,7 +10,7 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }), // Preserve the generated index.html
     new HtmlWebpackPlugin({
       title: 'WebPlay'
     })
