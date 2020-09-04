@@ -13,3 +13,6 @@ traditional techniques.
 
 I'm going to try and use rxjs Observables to get that sweet functional event/async
 handling.
+
+Considering exploring TypeScript's support for JSX (.tsx files)... could use this
+to allow user to more easily stuff HTML into the SVG-based UI...
