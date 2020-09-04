@@ -1,6 +1,5 @@
 import * as _ from "lodash";
 import { printMe } from './print';
-import * as svgjs from '@svgdotjs/svg.js';
 import { Main } from "./Main";
 import { Box } from "./Box";
 
