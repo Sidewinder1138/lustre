@@ -9,6 +9,7 @@ const box = new Box({
 main.addWidget(box);
 box.click.subscribe(() => {
   console.log('You clicked on original box!');
+  box.setColor('green');
 });
 
 const box2 = new Box({
@@ -18,4 +19,5 @@ const box2 = new Box({
 main.addWidget(box2);
 box2.click.subscribe(() => {
   console.log('You clicked on box2!');
+  box2.setColor('red');
 });

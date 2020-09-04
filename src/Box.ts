@@ -39,6 +39,10 @@ export class Box extends Widget {
     });
   }
 
+  public setColor(color: string) {
+    this.root.attr({ fill: color });
+  }
+
   public _getRoot(): svgjs.Element {
     return this.root;
   }
