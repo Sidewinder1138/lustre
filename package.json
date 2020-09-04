@@ -22,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/Sidewinder1138/webplay/issues"
   },
-  "homepage": "https://github.com/Sidewinder1138/webplay#readme"
+  "homepage": "https://github.com/Sidewinder1138/webplay#readme",
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
 }
