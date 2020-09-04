@@ -1,0 +1,26 @@
+{
+  "name": "webplay",
+  "version": "0.0.1",
+  "description": "Web UI Experiments",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sidewinder1138/webplay.git"
+  },
+  "keywords": [
+    "web",
+    "ui",
+    "svg",
+    "typescript",
+    "frontend"
+  ],
+  "author": "Chris Anderson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sidewinder1138/webplay/issues"
+  },
+  "homepage": "https://github.com/Sidewinder1138/webplay#readme"
+}
