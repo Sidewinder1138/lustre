@@ -24,11 +24,14 @@ export class Box extends Widget {
       inputs.color = '#f06';
     }
 
-    this.root = svgjs.SVG()
-      .rect(inputs.rect.size.width, inputs.rect.size.height)
+    this.root = new svgjs.Rect()
+      .size(inputs.rect.size.width, inputs.rect.size.height)
+      .move(inputs.rect.pos.x, inputs.rect.pos.y)
       .attr({ fill: inputs.color});
 
-    this.root.move(inputs.rect.pos.x, inputs.rect.pos.y);
+    this.root.click(() => {
+      console.log('You clicked me!');
+    });
   }
 
   public _getRoot(): svgjs.Element {
