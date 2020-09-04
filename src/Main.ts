@@ -1,5 +1,5 @@
 import * as svgjs from '@svgdotjs/svg.js';
-import { Box } from './Box';
+import { Widget } from './Widget';
 
 export class Main {
 
@@ -13,7 +13,7 @@ export class Main {
     this.bg = this.root.rect(this.size[0], this.size[1]).attr({ fill: '#333' });
   }
 
-  addBox(box: Box) {
-    this.root.add(box._root);
+  addWidget(widget: Widget) {
+    this.root.add(widget._getRoot());
   }
 }

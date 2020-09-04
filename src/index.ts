@@ -17,4 +17,4 @@ import { Box } from "./Box";
 
 const main = new Main();
 const box = new Box({ size: {width: 220, height: 50}, pos: {x: 150, y: 50}});
-main.addBox(box);
+main.addWidget(box);
