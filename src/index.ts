@@ -22,3 +22,12 @@ box2.click.subscribe(() => {
   box2.setColor('red');
   box2.move({ x: 100, y: 180 });
 });
+
+const resetBox = new Box();
+main.addWidget(resetBox);
+resetBox.click.subscribe(() => {
+  box.setColor('#3aa');
+  box2.setColor('#a3a');
+  box2.move({ x: 50, y: 150 });
+});
+resetBox.move({ x: 500, y: 10 });
