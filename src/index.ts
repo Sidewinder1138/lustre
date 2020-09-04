@@ -20,9 +20,15 @@ const box = new Box({
   color: '#3aa'
 });
 main.addWidget(box);
+box.click.subscribe(() => {
+  console.log('You clicked on original box!');
+});
 
 const box2 = new Box({
   rect: { size: {width: 220, height: 80}, pos: {x: 50, y: 150}},
   color: '#a3a'
 });
 main.addWidget(box2);
+box2.click.subscribe(() => {
+  console.log('You clicked on box2!');
+});

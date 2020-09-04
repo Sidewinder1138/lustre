@@ -1,6 +1,7 @@
 import * as svgjs from '@svgdotjs/svg.js';
 import { IRect } from "./Common";
 import { Widget } from './Widget';
+import { Observable, Subject } from 'rxjs';
 
 export interface BoxInputs {
   rect?: IRect;
@@ -8,6 +9,8 @@ export interface BoxInputs {
 }
 
 export class Box extends Widget {
+
+  click: Observable<void>;
 
   private root: svgjs.Rect;
 
@@ -29,8 +32,10 @@ export class Box extends Widget {
       .move(inputs.rect.pos.x, inputs.rect.pos.y)
       .attr({ fill: inputs.color});
 
+    this.click = new Subject<void>();
+
     this.root.click(() => {
-      console.log('You clicked me!');
+      (this.click as Subject<void>).next();
     });
   }
 
