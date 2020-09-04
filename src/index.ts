@@ -20,4 +20,5 @@ main.addWidget(box2);
 box2.click.subscribe(() => {
   console.log('You clicked on box2!');
   box2.setColor('red');
+  box2.move({ x: 100, y: 180 });
 });

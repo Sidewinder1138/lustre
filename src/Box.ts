@@ -1,5 +1,5 @@
 import * as svgjs from '@svgdotjs/svg.js';
-import { IRect } from "./Common";
+import { IPosition, IRect } from "./Common";
 import { Widget } from './Widget';
 import { Observable, Subject } from 'rxjs';
 
@@ -41,6 +41,10 @@ export class Box extends Widget {
 
   public setColor(color: string) {
     this.root.attr({ fill: color });
+  }
+
+  public move(pos: IPosition) {
+    this.root.move(pos.x, pos.y);
   }
 
   public _getRoot(): svgjs.Element {
