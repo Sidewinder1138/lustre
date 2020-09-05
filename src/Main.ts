@@ -13,12 +13,20 @@ export class Main {
     this.bg = this.root.rect(this.size[0], this.size[1]).attr({ fill: '#333' });
 
     let fo = (this.root as any).foreignObject(400, 400);
+    const div = document.createElement('div');
+    div.innerHTML = '<h1>HTML Content</h1><span>This is <b>cool</b> dude!</span>';
+    fo.add(div);
+    fo.move(400, 200);
+    fo.css('color', 'white');
+    fo.css('font-family', 'sans-serif');
 
-
-    const btn = document.createElement('button');
-    btn.innerHTML = 'Thingie';
-    fo.add(btn);
-    fo.move(400, 300);
+    let fo2 = (this.root as any).foreignObject(400, 400);
+    const div2 = document.createElement('div');
+    div2.innerHTML = '<h1>Other Content</h1>';
+    fo2.add(div2);
+    fo2.move(500, 210);
+    fo2.css('color', 'gray');
+    fo2.css('font-family', 'sans-serif');
   }
 
   addWidget(widget: Widget) {
@@ -37,3 +45,4 @@ export class Main {
 //   return element;
 // }
 // document.body.appendChild(component());
+
