@@ -16,6 +16,7 @@ export class Button extends Widget {
   private _root: svgjs.G;
   private _bg: svgjs.Rect;
   private _label: svgjs.Text;
+  private _overlay: svgjs.Rect;
 
   private _pos: IPosition = { x: 0, y: 0 };
 
@@ -49,29 +50,27 @@ export class Button extends Widget {
     this._label.plain('Button');
     this._label.center(0.5 * this._bg.width(), 0.5 * this._bg.height());
 
-    // Apply some CSS:
-    // TODO: see bug: https://github.com/svgdotjs/svg.js/issues/1076
-    (this._label.css as any)({
-      cursor: 'pointer',
-      'user-select': 'none'
-    });
-    this._bg.css('cursor', 'pointer');
+    this._overlay = new svgjs.Rect()
+      .size(size.width, size.height)
+      .radius(5)
+      .fill('#00000000');
+    this._root.add(this._overlay);
 
-    // Click Event
+    // CSS
+    this._label.css('user-select', 'none');
+    this._overlay.css('cursor', 'pointer');
+
+    // Events
     this.click = new Subject<void>();
-    this._bg.click(() => { this._emitClick(); });
-    this._label.click(() => { this._emitClick(); });
+    this._overlay.click(() => { this._onClick(); });
+    this._overlay.mouseover(() => { this._onMouseEnter(); });
+    this._overlay.mouseout(() => { this._onMouseExit(); });
+    this._overlay.mousedown(() => { this._onMouseDown(); });
+    this._overlay.mouseup(() => { this._onMouseUp(); });
+  }
 
-    // Mouse Enter/Exit Events
-    this._bg.mouseover(() => { this._onMouseEnter(); });
-    this._bg.mouseout(() => { this._onMouseExit(); });
-    this._label.mouseover(() => { this._onMouseEnter(); });
-    this._label.mouseout(() => { this._onMouseExit(); });
-
-    this._bg.mousedown(() => { this._onMouseDown(); });
-    this._bg.mouseup(() => { this._onMouseUp(); });
-    this._label.mousedown(() => { this._onMouseDown(); });
-    this._label.mouseup(() => { this._onMouseUp(); });
+  private _onClick() {
+    (this.click as Subject<void>).next();
   }
 
   private _onMouseEnter() {
@@ -88,10 +87,6 @@ export class Button extends Widget {
 
   private _onMouseUp() {
     this._bg.fill(this._bgColorHighlight);
-  }
-
-  private _emitClick() {
-    (this.click as Subject<void>).next();
   }
 
   public move(pos: IPosition): Button {
