@@ -21,17 +21,15 @@ box.click.subscribe(() => {
 });
 
 const btn = new Button();
-btn.data = { ticktock: false }
-btn.move({ x: 100, y: 50 });
-btn.label('Click me');
+btn.label('Click me').move({ x: 100, y: 50 });
 btn.click.subscribe(() => {
-  if (btn.data.ticktock) {
-    btn.label('Click me');
-  }
-  else {
-    btn.label('Thanks!');
-  }
-  btn.data.ticktock = !btn.data.ticktock;
+  console.log('Thanks!');
 });
-
 main.addWidget(btn);
+
+const btn2 = new Button();
+btn2.label('Touch Me!').move({ x: 100, y: 150 });
+btn2.click.subscribe(() => {
+  btn2.label('I Like That!');
+});
+main.addWidget(btn2);
