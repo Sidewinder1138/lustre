@@ -1,4 +1,5 @@
 import * as svgjs from '@svgdotjs/svg.js';
+import { Observable, Subject } from 'rxjs';
 import { IPosition, IRect, ISize } from './Common';
 import { Widget } from "./Widget";
 
@@ -8,9 +9,15 @@ export interface ButtonInputs {
 
 export class Button extends Widget {
 
-  private root: svgjs.G;
-  private bg: svgjs.Rect;
-  private label: svgjs.Text;
+  public click: Observable<void>;
+
+  public data: any = {};
+
+  private _root: svgjs.G;
+  private _bg: svgjs.Rect;
+  private _label: svgjs.Text;
+
+  private _pos: IPosition = { x: 0, y: 0 };
 
   constructor() {
     super();
@@ -18,31 +25,57 @@ export class Button extends Widget {
     const size: ISize = { width: 140, height: 40 };
     const bgColor = 'hsl(210, 100%, 60%)';
 
-    this.root = new svgjs.G();
+    this._root = new svgjs.G();
 
-    this.bg = new svgjs.Rect()
+    this._bg = new svgjs.Rect()
       .size(size.width, size.height)
       .radius(5)
       .fill(bgColor)
-    this.root.add(this.bg);
+    this._root.add(this._bg);
 
-    this.label = new svgjs.Text()
+    this._label = new svgjs.Text()
       .font({
         family: 'sans-serif',
         size: 20,
       })
-      .plain('Click me!')
-      .fill('white')
+      .fill('white');
 
-    this.root.add(this.label);
-    this.label.center(0.5 * size.width, 0.5 * size.height)
+    this._root.add(this._label);
+
+    this._label.plain('Button');
+    this._label.center(0.5 * this._bg.width(), 0.5 * this._bg.height());
+
+    // Apply some CSS:
+    this._label.css('cursor', 'pointer');
+    this._label.css('user-select', 'none');
+    this._bg.css('cursor', 'pointer');
+
+    // Events
+    this.click = new Subject<void>();
+    this._bg.click(() => { this._emitClick(); });
+    this._label.click(() => { this._emitClick(); });
+  }
+
+  private _emitClick() {
+    (this.click as Subject<void>).next();
   }
 
   public move(pos: IPosition) {
-    this.root.move(pos.x, pos.y);
+    this._pos = pos;
+    this._root.move(pos.x, pos.y);
+  }
+
+  public label(label: string): Button {
+    this._label.plain(label);
+
+    this._root.move(0, 0);
+    this._label.center(0.5 * this._bg.width(), 0.5 * this._bg.height());
+    this._root.move(this._pos.x, this._pos.y);
+
+    return this;
   }
 
   public _getRoot(): svgjs.Element {
-    return this.root;
+    return this._root;
   }
 }
