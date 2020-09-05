@@ -60,6 +60,10 @@ export class Button extends Widget {
     this._label.css('user-select', 'none');
     this._overlay.css('cursor', 'pointer');
 
+    // TODO: see bug: https://github.com/svgdotjs/svg.js/issues/1076
+    this._bg.css('box-shadow', '9px 10px 34px 0px rgba(0,0,0,0.34);');
+
+
     // Events
     this.click = new Subject<void>();
     this._overlay.click(() => { this._onClick(); });
