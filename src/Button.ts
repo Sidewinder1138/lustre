@@ -46,9 +46,7 @@ export class Button extends Widget {
 
     this._root.add(this._label);
 
-    // TODO: would like to call 'label' but see issue there:
-    this._label.plain('Button');
-    this._label.center(0.5 * this._bg.width(), 0.5 * this._bg.height());
+    this.label('Button');
 
     this._overlay = new svgjs.Rect()
       .size(size.width, size.height)
@@ -107,12 +105,10 @@ export class Button extends Widget {
 
   public label(label: string): Button {
     this._label.plain(label);
-
-    //TODO: gotta sort this out
-    this._root.move(0, 0);
-    this._label.center(0.5 * this._bg.width(), 0.5 * this._bg.height());
-    this._root.move(this._pos.x, this._pos.y);
-
+    this._label.center(
+      (0.5 * this._bg.width()) + this._bg.x(),
+      (0.5 * this._bg.height()) + this._bg.y()
+    );
     return this;
   }
 
