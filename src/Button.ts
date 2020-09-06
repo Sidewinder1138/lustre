@@ -66,11 +66,17 @@ export class Button extends Widget {
 
     // Events
     this.click = new Subject<void>();
-    this._overlay.click(() => { this._onClick(); });
-    this._overlay.mouseover(() => { this._onMouseEnter(); });
-    this._overlay.mouseout(() => { this._onMouseExit(); });
-    this._overlay.mousedown(() => { this._onMouseDown(); });
-    this._overlay.mouseup(() => { this._onMouseUp(); });
+    this._overlay.click((e: MouseEvent) => { this._onClick(); });
+    this._overlay.mouseover((e: MouseEvent) => { this._onMouseEnter(); });
+    this._overlay.mouseout((e: MouseEvent) => { this._onMouseExit(); });
+    this._overlay.mousedown((e: MouseEvent) => {
+      e.preventDefault();
+      this._onMouseDown();
+    });
+    this._overlay.mouseup((e: MouseEvent) => {
+      e.preventDefault();
+      this._onMouseUp();
+    });
   }
 
   private _onClick() {
