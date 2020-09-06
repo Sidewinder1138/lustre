@@ -1,24 +1,18 @@
 import * as svgjs from '@svgdotjs/svg.js';
 import { Observable, Subject } from 'rxjs';
-import { IPosition, IRect, ISize } from './Common';
+import { ISize } from './Common';
 import { Widget } from "./Widget";
-
-export interface ButtonInputs {
-  rect?: IRect;
-}
 
 export class Button extends Widget {
 
   public click: Observable<void>;
 
-  public data: any = {}; // TODO: dubious about this feature...
+  public data: any = {}; // TODO: look at svgjs, they have 'memory', and also another mechanism, both look like this...
 
   private _root: svgjs.G;
   private _bg: svgjs.Rect;
   private _label: svgjs.Text;
   private _overlay: svgjs.Rect;
-
-  private _pos: IPosition = { x: 0, y: 0 };
 
   private _bgColor = 'hsl(210, 100%, 60%)';
   private _bgColorHighlight = 'hsl(210, 100%, 70%)';
@@ -27,16 +21,10 @@ export class Button extends Widget {
   constructor() {
     super();
 
-    const size: ISize = { width: 140, height: 40 };
-
     this._root = new svgjs.G();
 
-    this._bg = new svgjs.Rect()
-      .size(size.width, size.height)
-      .radius(5)
-      .fill(this._bgColor)
-    this._root.add(this._bg);
-
+    this._bg = new svgjs.Rect().radius(5).fill(this._bgColor);
+    this._overlay = new svgjs.Rect().radius(5).fill('#00000000');
     this._label = new svgjs.Text()
       .font({
         family: 'sans-serif',
@@ -44,23 +32,17 @@ export class Button extends Widget {
       })
       .fill('white');
 
+    this._root.add(this._bg);
     this._root.add(this._label);
+    this._root.add(this._overlay);
 
     this.label('Button');
 
-    this._overlay = new svgjs.Rect()
-      .size(size.width, size.height)
-      .radius(5)
-      .fill('#00000000');
-    this._root.add(this._overlay);
+    this.size({ width: 140, height: 40 });
 
     // CSS
     this._label.css('user-select', 'none');
     this._overlay.css('cursor', 'pointer');
-
-    // TODO: see bug: https://github.com/svgdotjs/svg.js/issues/1076
-    this._bg.css('box-shadow', '9px 10px 34px 0px rgba(0,0,0,0.34);');
-
 
     // Events
     this.click = new Subject<void>();
@@ -77,42 +59,36 @@ export class Button extends Widget {
     });
   }
 
-  private _onClick() {
-    (this.click as Subject<void>).next();
-  }
-
-  private _onMouseEnter() {
-    this._bg.fill(this._bgColorHighlight);
-  }
-
-  private _onMouseExit() {
-    this._bg.fill(this._bgColor);
-  }
-
-  private _onMouseDown() {
-    this._bg.fill(this._bgColorPressed);
-  }
-
-  private _onMouseUp() {
-    this._bg.fill(this._bgColorHighlight);
-  }
-
-  public move(pos: IPosition): Button {
-    this._pos = pos;
-    this._root.move(pos.x, pos.y);
-    return this;
-  }
+  //TODO: kill these, move to lambdas above
+  private _onClick() { (this.click as Subject<void>).next(); }
+  private _onMouseEnter() { this._bg.fill(this._bgColorHighlight); }
+  private _onMouseExit() { this._bg.fill(this._bgColor); }
+  private _onMouseDown() { this._bg.fill(this._bgColorPressed); }
+  private _onMouseUp() { this._bg.fill(this._bgColorHighlight); }
 
   public label(label: string): Button {
     this._label.plain(label);
+    this._layout();
+    return this;
+  }
+
+  private _layout() {
     this._label.center(
       (0.5 * this._bg.width()) + this._bg.x(),
       (0.5 * this._bg.height()) + this._bg.y()
     );
-    return this;
   }
 
+  // ------------------------------------------------------------------------------------
+  // Widget overrides:
+  // ------------------------------------------------------------------------------------
   public _getRoot(): svgjs.Element {
     return this._root;
+  }
+
+  public _resize(size: ISize): void {
+    this._bg.size(size.width, size.height);
+    this._overlay.size(size.width, size.height);
+    this._layout();
   }
 }

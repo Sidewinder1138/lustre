@@ -1,53 +1,39 @@
 import * as svgjs from '@svgdotjs/svg.js';
-import { IPosition, IRect } from "./Common";
-import { Widget } from './Widget';
 import { Observable, Subject } from 'rxjs';
-
-export interface BoxInputs {
-  rect?: IRect;
-  color?: string;
-}
+import { ISize } from "./Common";
+import { Widget } from './Widget';
 
 export class Box extends Widget {
 
   click: Observable<void>;
 
-  private root: svgjs.Rect;
+  private _root: svgjs.Rect;
 
-  constructor(inputs?: BoxInputs) {
+  constructor() {
     super();
 
-    if (!inputs) {
-      inputs = {};
-    }
-    if (!inputs.rect) {
-      inputs.rect = { size: {width: 50, height: 50}, pos: {x: 0, y: 0}};
-    }
-    if (!inputs.color) {
-      inputs.color = '#f06';
-    }
+    this._root = new svgjs.Rect();
 
-    this.root = new svgjs.Rect()
-      .size(inputs.rect.size.width, inputs.rect.size.height)
-      .move(inputs.rect.pos.x, inputs.rect.pos.y)
-      .attr({ fill: inputs.color});
+    this.size({ width: 50, height: 50 });
+    this.color('#f06');
 
     this.click = new Subject<void>();
-
-    this.root.click(() => {
+    this._root.click(() => {
       (this.click as Subject<void>).next();
     });
   }
 
-  public setColor(color: string) {
-    this.root.attr({ fill: color });
+  public color(color: string) {
+    this._root.fill(color);
+    return this;
   }
 
-  public move(pos: IPosition) {
-    this.root.move(pos.x, pos.y);
-  }
+  // ------------------------------------------------------------------------------------
+  // Widget overrides:
+  // ------------------------------------------------------------------------------------
+  public _getRoot(): svgjs.Element { return this._root; }
 
-  public _getRoot(): svgjs.Element {
-    return this.root;
+  public _resize(size: ISize): void {
+    this._root.size(size.width, size.height);
   }
 }
