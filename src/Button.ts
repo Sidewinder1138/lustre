@@ -59,7 +59,6 @@ export class Button extends Widget {
     });
   }
 
-  //TODO: kill these, move to lambdas above
   private _onClick() { (this.click as Subject<void>).next(); }
   private _onMouseEnter() { this._bg.fill(this._bgColorHighlight); }
   private _onMouseExit() { this._bg.fill(this._bgColor); }
