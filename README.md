@@ -16,3 +16,12 @@ handling.
 
 Considering exploring TypeScript's support for JSX (.tsx files)... could use this
 to allow user to more easily stuff HTML into the SVG-based UI...
+
+# Usage
+$ npm install
+
+In one tab do:
+$ npm run watch
+
+In another tab do:
+$ npm run serve
