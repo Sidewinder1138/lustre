@@ -38,3 +38,20 @@ btn.click.subscribe(() => {
   btn.label('I Like That!');
 });
 main.addWidget(btn);
+
+
+{
+  const boxParent = new Box().color('lightgreen')
+    .size({ width: 280, height: 150 })
+    .move({ x: 20, y: 250 });
+  main.addWidget(boxParent);
+
+  const boxChild1 = new Box().color('lightblue')
+    .size({ width: 50, height: 50 })
+    ;
+  boxParent.addChild(boxChild1);
+
+  //boxParent.move({ x: 20, y: 250 });
+  //boxChild1.move({ x: 20, y: 20 });
+
+}

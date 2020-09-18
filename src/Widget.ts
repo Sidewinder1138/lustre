@@ -18,7 +18,21 @@ export abstract class Widget {
     return this;
   }
 
+  public addChild(child: Widget) {
+    child.move({
+      x: child._pos.x + this._pos.x,
+      y: child._pos.y + this._pos.y
+    });
+    this._addChild(child);
+
+    return this;
+  }
+
+  // ------------------------------------------------------------------------------------
+  // Overridables:
+  // ------------------------------------------------------------------------------------
   public abstract _getRoot(): svgjs.Element;
   public abstract _resize(size: ISize): void;
+  public _addChild(child: Widget): void {}
 
 }

@@ -7,12 +7,15 @@ export class Box extends Widget {
 
   click: Observable<void>;
 
-  private _root: svgjs.Rect;
+  private _root: svgjs.G;
+  private _bg: svgjs.Rect;
 
   constructor() {
     super();
 
-    this._root = new svgjs.Rect();
+    this._root = new svgjs.G();
+    this._bg = new svgjs.Rect();
+    this._root.add(this._bg);
 
     this.size({ width: 50, height: 50 });
     this.color('#f06');
@@ -24,7 +27,7 @@ export class Box extends Widget {
   }
 
   public color(color: string) {
-    this._root.fill(color);
+    this._bg.fill(color);
     return this;
   }
 
@@ -34,6 +37,10 @@ export class Box extends Widget {
   public _getRoot(): svgjs.Element { return this._root; }
 
   public _resize(size: ISize): void {
-    this._root.size(size.width, size.height);
+    this._bg.size(size.width, size.height);
+  }
+
+  public _addChild(child: Widget): void {
+    this._root.add(child._getRoot());
   }
 }
