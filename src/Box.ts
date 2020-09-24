@@ -18,7 +18,7 @@ export class Box extends Widget {
     this._root.add(this._bg);
 
     this.size = { width: 50, height: 50 };
-    this.setColor('#f06');
+    this.color = '#f06';
 
     this.click = new Subject<void>();
     this._root.click(() => {
@@ -26,8 +26,8 @@ export class Box extends Widget {
     });
   }
 
-  public getColor(): string { return this._color; }
-  public setColor(color: string): void {
+  public get color(): string { return this._color; }
+  public set color(color: string) {
     this._color = color;
     this._bg.fill(this._color);
   }

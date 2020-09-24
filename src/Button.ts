@@ -37,7 +37,7 @@ export class Button extends Widget {
     this._root.add(this._label);
     this._root.add(this._overlay);
 
-    this.setLabel('Button');
+    this.label = 'Button';
 
     this.size = { width: 140, height: 40 };
 
@@ -66,8 +66,8 @@ export class Button extends Widget {
   private _onMouseDown() { this._bg.fill(this._bgColorPressed); }
   private _onMouseUp() { this._bg.fill(this._bgColorHighlight); }
 
-  public getLabel(): string { return this._labelText; }
-  public setLabel(label: string): void {
+  public get label(): string { return this._labelText; }
+  public set label(label: string) {
     this._labelText = label;
     this._label.plain(this._labelText);
     this._layout();
