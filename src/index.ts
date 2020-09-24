@@ -12,8 +12,8 @@ const main = new Main();
   for (let i = 0; i < 10; i++) {
     let box = new Box();
     box.setColor(`hsl(${hue}, 50%, 50%)`);
-    box.setPosition({ x, y });
-    main.addChild(box);
+    box.position = { x, y };
+    main.add(box);
     y += 60; hue += 30;
   }
 }
@@ -24,16 +24,16 @@ const main = new Main();
   let y = 20;
   let btn = new Button();
   btn.setLabel('Click me');
-  btn.setPosition({ x, y });
+  btn.position = { x, y };
   btn.click.subscribe(() => {
     console.log('Thanks!');
   });
-  main.addChild(btn); y += 50;
+  main.add(btn); y += 50;
 
   btn = new Button();
   btn.setLabel("I'm a Big Boy!");
-  btn.setPosition({ x, y });
-  btn.setSize({ width: 180, height: 60 });
+  btn.position = { x, y };
+  btn.size = { width: 180, height: 60 };
   btn.click.subscribe(() => {
     if (btn.getLabel().includes('Boy')) {
       btn.setLabel('Yes I am!');
@@ -42,7 +42,7 @@ const main = new Main();
       btn.setLabel("I'm a Big Boy!");
     }
   });
-  main.addChild(btn);
+  main.add(btn);
 }
 
 // Box with Children
@@ -52,30 +52,30 @@ const main = new Main();
 
   const parent = new Box();
   parent.setColor('lightgreen');
-  parent.setSize({ width: 350, height: 300 });
-  parent.setPosition({ x, y });
-  main.addChild(parent);
+  parent.size = { width: 350, height: 300 };
+  parent.position = { x, y };
+  main.add(parent);
 
   let box = new Box();
   box.setColor('green');
-  box.setPosition({ x: 20, y: 20 });
-  parent.addChild(box);
+  box.position = { x: 20, y: 20 };
+  parent.add(box);
 
   let btn = new Button();
   btn.setLabel('Nudge ->');
-  btn.setPosition({ x: 100, y: 100 });
-  parent.addChild(btn);
+  btn.position = { x: 100, y: 100 };
+  parent.add(btn);
   btn.click.subscribe(() => {
     x += 20;
-    parent.setPosition({ x, y });
+    parent.position = { x, y };
   });
 
   btn = new Button();
   btn.setLabel('<- Nudge');
-  btn.setPosition({ x: 100, y: 160 });
-  parent.addChild(btn);
+  btn.position = { x: 100, y: 160 };
+  parent.add(btn);
   btn.click.subscribe(() => {
     x -= 20;
-    parent.setPosition({ x, y });
+    parent.position = { x, y };
   });
 }

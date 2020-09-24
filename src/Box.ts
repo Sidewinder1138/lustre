@@ -17,7 +17,7 @@ export class Box extends Widget {
     this._bg = new svgjs.Rect();
     this._root.add(this._bg);
 
-    this.setSize({ width: 50, height: 50 });
+    this.size = { width: 50, height: 50 };
     this.setColor('#f06');
 
     this.click = new Subject<void>();
@@ -39,12 +39,12 @@ export class Box extends Widget {
 
   protected _layout(): void {
     this._bg.size(
-      this.getSize().width,
-      this.getSize().height
+      this.size.width,
+      this.size.height
     );
     this._root.move(
-      this.getAbsPosition().x,
-      this.getAbsPosition().y
+      this.absPosition.x,
+      this.absPosition.y
     );
   }
 

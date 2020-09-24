@@ -39,7 +39,7 @@ export class Button extends Widget {
 
     this.setLabel('Button');
 
-    this.setSize({ width: 140, height: 40 });
+    this.size = { width: 140, height: 40 };
 
     // CSS
     this._label.css('user-select', 'none');
@@ -79,10 +79,9 @@ export class Button extends Widget {
   public _getRoot(): svgjs.Element { return this._root; }
 
   protected _layout() {
-    this._root.move(this.getAbsPosition().x, this.getAbsPosition().y);
-    const size = this.getSize();
-    this._bg.size(size.width, size.height);
-    this._overlay.size(size.width, size.height);
+    this._root.move(this.absPosition.x, this.absPosition.y);
+    this._bg.size(this.size.width, this.size.height);
+    this._overlay.size(this.size.width, this.size.height);
     this._label.center(
       (0.5 * this._bg.width()) + this._bg.x(),
       (0.5 * this._bg.height()) + this._bg.y()

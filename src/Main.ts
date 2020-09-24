@@ -1,22 +1,18 @@
 import * as svgjs from '@svgdotjs/svg.js';
 import { Widget } from './Widget';
 
-// TODO: Main isn't really supporting all the things a Widget can do... but we
-// are leveraging Widgget's addChild() function at least...
 export class Main extends Widget {
 
-  private size = [1200, 800];
-
-  private bg: svgjs.Rect; //TODO: can probably just have user use a Box, or make Main inherit from Box?
-  private root: svgjs.Svg;
+  private _root: svgjs.Svg;
+  private _bg: svgjs.Rect; //TODO: can probably just have user use a Box, or make Main inherit from Box?
 
   constructor() {
     super();
 
-    this.root = svgjs.SVG().addTo('body').size(this.size[0], this.size[1]);
-    this.bg = this.root.rect(this.size[0], this.size[1]).attr({ fill: '#333' });
+    this._root = svgjs.SVG().addTo('body');
+    this._bg = this._root.rect().attr({ fill: '#333' });
 
-    let fo = (this.root as any).foreignObject(400, 400);
+    let fo = (this._root as any).foreignObject(400, 400);
     const div = document.createElement('div');
     div.innerHTML = '<h1>HTML Content</h1><span>This is <b>cool</b> dude!</span>';
     fo.add(div);
@@ -24,20 +20,33 @@ export class Main extends Widget {
     fo.css('color', 'white');
     fo.css('font-family', 'sans-serif');
 
-    let fo2 = (this.root as any).foreignObject(400, 400);
+    let fo2 = (this._root as any).foreignObject(400, 400);
     const div2 = document.createElement('div');
     div2.innerHTML = '<h1>Other Content</h1>';
     fo2.add(div2);
     fo2.move(810, 560);
     fo2.css('color', 'gray');
     fo2.css('font-family', 'sans-serif');
+
+    this.size = { width: 1200, height: 800 };
   }
 
   // ------------------------------------------------------------------------------------
   // Widget Overrides:
   // ------------------------------------------------------------------------------------
   public _getRoot(): svgjs.Element {
-    return this.root;
+    return this._root;
+  }
+
+  protected _layout(): void {
+    this._root.size(
+      this.size.width,
+      this.size.height
+    );
+    this._bg.size(
+      this.size.width,
+      this.size.height
+    );
   }
 }
 
