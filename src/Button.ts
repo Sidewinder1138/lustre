@@ -45,6 +45,9 @@ export class Button extends Widget {
     this._label.css('user-select', 'none');
     this._overlay.css('cursor', 'pointer');
 
+    this._root.attr('role', 'button');
+    this._overlay.attr('focusable', 'true');
+
     // Events
     this.click = new Subject<void>();
     this._overlay.click((e: MouseEvent) => { this._onClick(); });
@@ -69,6 +72,8 @@ export class Button extends Widget {
   public get label(): string { return this._labelText; }
   public set label(label: string) {
     this._labelText = label;
+    this._overlay.attr('aria-label', this._labelText);
+    this._label.attr('aria-label', this._labelText);
     this._label.plain(this._labelText);
     this._layout();
   }
