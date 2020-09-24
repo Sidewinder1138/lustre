@@ -17,7 +17,7 @@ export class Box extends Widget {
     this._bg = new svgjs.Rect();
     this._root.add(this._bg);
 
-    this.size({ width: 50, height: 50 });
+    this.setSize({ width: 50, height: 50 });
     this.color('#f06');
 
     this.click = new Subject<void>();
@@ -34,13 +34,21 @@ export class Box extends Widget {
   // ------------------------------------------------------------------------------------
   // Widget overrides:
   // ------------------------------------------------------------------------------------
-  public _getRoot(): svgjs.Element { return this._root; }
+  protected _getRoot(): svgjs.Element { return this._root; }
 
-  public _resize(size: ISize): void {
-    this._bg.size(size.width, size.height);
-  }
 
-  public _addChild(child: Widget): void {
-    this._root.add(child._getRoot());
+
+  // protected _addChild(child: Widget): void {
+  //   this._root.add(child._getRoot());
+  // }
+
+  protected _layout(): void {
+    this._bg.size(
+      this.getSize().width,
+      this.getSize().height
+    );
+    this._root.move(
+      this.
+    )
   }
 }

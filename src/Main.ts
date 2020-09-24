@@ -30,7 +30,7 @@ export class Main {
   }
 
   addWidget(widget: Widget) {
-    this.root.add(widget._getRoot());
+    this.root.add((widget as any)._getRoot());
   }
 }
 
