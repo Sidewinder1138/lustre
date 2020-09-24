@@ -11,14 +11,26 @@ export class Page1 extends Page {
     {
       let x = 20;
       let y = 20;
-      let hue = 200;
+      let boxes: Box[] = [];
       for (let i = 0; i < 10; i++) {
         let box = new Box();
-        box.color = `hsl(${hue}, 50%, 50%)`;
+        boxes.push(box);
         box.position = { x, y };
         this.add(box);
-        y += 60; hue += 30;
+        y += 60;
       }
+      let hue = 0;
+      const updateHue = () => {
+        let hueOffset = 0;
+        for (let i = 0; i < boxes.length; i++) {
+          let box = boxes[i];
+          box.color = `hsl(${hue + hueOffset}, 100%, 70%)`;
+          hueOffset += 20;
+        }
+        hue -= 0.7;
+      }
+      updateHue();
+      setInterval(updateHue, 10);
     }
 
     // Buttons
@@ -54,7 +66,7 @@ export class Page1 extends Page {
       let y = 20;
 
       const parent = new Box();
-      parent.color = 'lightgreen';
+      parent.color = '#ddd';
       parent.size = { width: 350, height: 300 };
       parent.position = { x, y };
       this.add(parent);
@@ -81,7 +93,7 @@ export class Page1 extends Page {
       {
         let x = 20;
         let y = 160;
-        let hue = 200;
+        let hue = 290;
 
         let box = new Box(); parent.add(box);
         box.color = `hsl(${hue}, 50%, 50%)`;
