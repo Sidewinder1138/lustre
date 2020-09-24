@@ -11,7 +11,7 @@ export abstract class Widget {
 
   public getPosition(): IPosition { return {...this._pos}; }
   public getAbsPosition(): IPosition { return {...this._absPos}; }
-  public setPosition(pos: IPosition): Widget {
+  public setPosition(pos: IPosition): void {
     this._pos = {...pos};
     this._absPos = this._pos;
     if (this._parent) {
@@ -19,22 +19,19 @@ export abstract class Widget {
       this._absPos.y += this._parent._absPos.y;
     }
     this._layout();
-    return this;
   }
 
   public getSize(): ISize { return {...this._size}; }
-  public setSize(size?: ISize): Widget {
+  public setSize(size?: ISize): void {
     this._size = {...size};
     this._layout();
-    return this;
   }
 
-  public addChild(child: Widget) {
+  public addChild(child: Widget): void {
     child._parent = this;
     this._children.push(child);
     child.setPosition(child._pos);
     this._handleNewChild(child);
-    return this; //TODO: maybe return child instead?
   }
 
   // ------------------------------------------------------------------------------------

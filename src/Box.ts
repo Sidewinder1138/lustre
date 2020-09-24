@@ -1,6 +1,5 @@
 import * as svgjs from '@svgdotjs/svg.js';
 import { Observable, Subject } from 'rxjs';
-import { ISize } from "./Common";
 import { Widget } from './Widget';
 
 export class Box extends Widget {
@@ -9,6 +8,7 @@ export class Box extends Widget {
 
   private _root: svgjs.G;
   private _bg: svgjs.Rect;
+  private _color: string;
 
   constructor() {
     super();
@@ -18,7 +18,7 @@ export class Box extends Widget {
     this._root.add(this._bg);
 
     this.setSize({ width: 50, height: 50 });
-    this.color('#f06');
+    this.setColor('#f06');
 
     this.click = new Subject<void>();
     this._root.click(() => {
@@ -26,9 +26,10 @@ export class Box extends Widget {
     });
   }
 
-  public color(color: string) {
-    this._bg.fill(color);
-    return this;
+  public getColor(): string { return this._color; }
+  public setColor(color: string): void {
+    this._color = color;
+    this._bg.fill(this._color);
   }
 
   // ------------------------------------------------------------------------------------

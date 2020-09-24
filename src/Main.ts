@@ -5,7 +5,7 @@ import { Widget } from './Widget';
 // are leveraging Widgget's addChild() function at least...
 export class Main extends Widget {
 
-  private size = [800, 600];
+  private size = [1200, 800];
 
   private bg: svgjs.Rect; //TODO: can probably just have user use a Box, or make Main inherit from Box?
   private root: svgjs.Svg;
@@ -20,7 +20,7 @@ export class Main extends Widget {
     const div = document.createElement('div');
     div.innerHTML = '<h1>HTML Content</h1><span>This is <b>cool</b> dude!</span>';
     fo.add(div);
-    fo.move(400, 200);
+    fo.move(800, 550);
     fo.css('color', 'white');
     fo.css('font-family', 'sans-serif');
 
@@ -28,7 +28,7 @@ export class Main extends Widget {
     const div2 = document.createElement('div');
     div2.innerHTML = '<h1>Other Content</h1>';
     fo2.add(div2);
-    fo2.move(500, 210);
+    fo2.move(810, 560);
     fo2.css('color', 'gray');
     fo2.css('font-family', 'sans-serif');
   }
