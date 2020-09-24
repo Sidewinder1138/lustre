@@ -7,6 +7,10 @@ Traditional HTML/CSS content can be "embedded" into Lustre widgets if desired, s
 
 Lustre is meant for people who are tired of shoehorning HTML/CSS into doing things they were never meant to do.
 
+![Lustre Screenshot](https://github.com/Sidewinder1138/lustre/blob/master/docs/images/lustre-screenshot-2020-09-24.png)
+
+
+
 # Usage
 `$ npm install`
 
