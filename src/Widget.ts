@@ -20,11 +20,8 @@ export abstract class Widget {
   public get position(): IPosition { return {...this._pos}; }
   public set position(pos: IPosition) {
     this._pos = {...pos};
-    this._absPos = this._pos;
-    if (this._parent) {
-      this._absPos.x += this._parent._absPos.x;
-      this._absPos.y += this._parent._absPos.y;
-    }
+    this._absPos = {...pos};
+    this._updateAbsPos();
     this._layout();
   }
   public get x(): number { return this.position.x; }
@@ -33,7 +30,21 @@ export abstract class Widget {
   }
   public get y(): number { return this.position.y; }
   public set y(val: number) {
-    this.position = { x: this.position.x, y: val; }
+    this.position = { x: this.position.x, y: val }
+  }
+
+  private _updateAbsPos() {
+    if (this._parent) {
+      this._absPos.x += this._parent._absPos.x;
+      this._absPos.y += this._parent._absPos.y;
+    }
+    // TODO: This is BAD for performance... and, seems like it's not necessary since
+    // the underlying SVG elements already store their abs position... need to leverage
+    // that in a better way somehow... like instead of caching _absPos, just set/get
+    // it from the _getRoot() element...
+    for (const child of this._children) {
+      child._updateAbsPos();
+    }
   }
 
   public get size(): ISize { return {...this._size}; }
