@@ -12,7 +12,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }), // Preserve the generated index.html
     new HtmlWebpackPlugin({
-      title: 'WebPlay'
+      title: 'Lustre UI'
     })
   ],
   module: {

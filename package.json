@@ -1,5 +1,5 @@
 {
-  "name": "webplay",
+  "name": "lustre",
   "version": "0.0.1",
   "description": "Web UI Experiments",
   "private": true,
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sidewinder1138/webplay.git"
+    "url": "git+https://github.com/Sidewinder1138/lustre.git"
   },
   "keywords": [
     "web",
@@ -23,9 +23,9 @@
   "author": "Chris Anderson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Sidewinder1138/webplay/issues"
+    "url": "https://github.com/Sidewinder1138/lustre/issues"
   },
-  "homepage": "https://github.com/Sidewinder1138/webplay#readme",
+  "homepage": "https://github.com/Sidewinder1138/lustre#readme",
   "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "html-webpack-plugin": "^4.4.1",
