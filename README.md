@@ -22,7 +22,7 @@ Frankly, I have no idea. I've seen some objections including:
   * Won't work well for accessibility - Response: Actually we can very nicely support accessibility using aria tagging and other techniques.
   * Won't work well for search engines - Response: I'm confident we can solve this too, but open to suggestions (I'm not an SEO expert).
   * The performance will be terrible - Response: I'm not at all convinced, SVG renders very fast. However, we will be benchmarking and optimizing like crazy where needed.
-  * It's just not "the right way" to do things - Response: The "right" way is whichever way works best, and this project is attempting to show at least a possible new "right" way to do things.
+  * It's just not "the right way" to do things - Response: The "right" way is whichever way works best, and this project is attempting to show at least a possible new "right" way to do things in the crazy turbulent world for Web front-end.
   
   
 # Usage
