@@ -12,22 +12,24 @@ export class Main extends Widget {
     this._root = svgjs.SVG().addTo('body');
     this._bg = this._root.rect().attr({ fill: '#333' });
 
-    let fo = (this._root as any).foreignObject(400, 400);
-    const div = document.createElement('div');
-    div.innerHTML = '<h1>HTML Content</h1><span>This is <b>cool</b> dude!</span>';
-    fo.add(div);
-    fo.move(800, 550);
-    fo.css('color', 'white');
-    fo.css('font-family', 'sans-serif');
+    //TODO: move to Html class
+    // let fo = (this._root as any).foreignObject(400, 400);
+    // const div = document.createElement('div');
+    // div.innerHTML = '<h1>HTML Content</h1><span>This is <b>cool</b> dude!</span>';
+    // fo.add(div);
+    // fo.move(800, 550);
+    // fo.css('color', 'white');
+    // fo.css('font-family', 'sans-serif');
 
-    let fo2 = (this._root as any).foreignObject(400, 400);
-    const div2 = document.createElement('div');
-    div2.innerHTML = '<h1>Other Content</h1>';
-    fo2.add(div2);
-    fo2.move(810, 560);
-    fo2.css('color', 'gray');
-    fo2.css('font-family', 'sans-serif');
+    // let fo2 = (this._root as any).foreignObject(400, 400);
+    // const div2 = document.createElement('div');
+    // div2.innerHTML = '<h1>Other Content</h1>';
+    // fo2.add(div2);
+    // fo2.move(810, 560);
+    // fo2.css('color', 'gray');
+    // fo2.css('font-family', 'sans-serif');
 
+    this.position = { x: 0, y : 0 };
     this.size = { width: 1200, height: 800 };
   }
 
