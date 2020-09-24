@@ -30,21 +30,10 @@ export abstract class Widget {
   }
 
   public addChild(child: Widget) {
-
     child._parent = this;
     this._children.push(child);
-
-    const childOrigPos = {...child._pos};
-    //console.log('childOrigAbsPos', childOrigAbsPos);
-    // const relativePos = {
-    //   x: this._absPos.x - childOrigAbsPos.x,
-    //   y: this._absPos.y - childOrigAbsPos.y
-    // };
-    // console.log('relatiePos=', relativePos);
-    child.setPosition(childOrigPos);
-
-    this._addChild(child);
-
+    child.setPosition(child._pos);
+    this._handleNewChild(child);
     return this; //TODO: maybe return child instead?
   }
 
@@ -52,9 +41,8 @@ export abstract class Widget {
   // Overridables:
   // ------------------------------------------------------------------------------------
   public abstract _getRoot(): svgjs.Element;
-  protected _addChild(child: Widget): void {
+  protected _handleNewChild(child: Widget): void {
     this._getRoot().add(child._getRoot());
   }
   protected _layout(): void {}
-
 }

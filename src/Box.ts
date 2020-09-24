@@ -32,7 +32,7 @@ export class Box extends Widget {
   }
 
   // ------------------------------------------------------------------------------------
-  // Widget Overridables:
+  // Widget Overrides:
   // ------------------------------------------------------------------------------------
   public _getRoot(): svgjs.Element { return this._root; }
 

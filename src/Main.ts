@@ -1,14 +1,18 @@
 import * as svgjs from '@svgdotjs/svg.js';
 import { Widget } from './Widget';
 
-export class Main {
+// TODO: Main isn't really supporting all the things a Widget can do... but we
+// are leveraging Widgget's addChild() function at least...
+export class Main extends Widget {
 
   private size = [800, 600];
 
-  private bg: svgjs.Rect;
+  private bg: svgjs.Rect; //TODO: can probably just have user use a Box, or make Main inherit from Box?
   private root: svgjs.Svg;
 
   constructor() {
+    super();
+
     this.root = svgjs.SVG().addTo('body').size(this.size[0], this.size[1]);
     this.bg = this.root.rect(this.size[0], this.size[1]).attr({ fill: '#333' });
 
@@ -29,8 +33,11 @@ export class Main {
     fo2.css('font-family', 'sans-serif');
   }
 
-  addWidget(widget: Widget) {
-    this.root.add((widget as any)._getRoot());
+  // ------------------------------------------------------------------------------------
+  // Widget Overrides:
+  // ------------------------------------------------------------------------------------
+  public _getRoot(): svgjs.Element {
+    return this.root;
   }
 }
 
