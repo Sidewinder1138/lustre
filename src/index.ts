@@ -62,7 +62,7 @@ const main = new Main();
   parent.add(btn);
   btn.click.subscribe(() => {
     x += 20;
-    parent.position = { x, y };
+    parent.x = x;
   });
 
   btn = new Button();
@@ -71,7 +71,7 @@ const main = new Main();
   parent.add(btn);
   btn.click.subscribe(() => {
     x -= 20;
-    parent.position = { x, y };
+    parent.x = x;
   });
 
   // Visibility Test

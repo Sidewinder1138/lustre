@@ -27,19 +27,25 @@ export abstract class Widget {
     }
     this._layout();
   }
+  public get x(): number { return this.position.x; }
+  public set x(val: number) {
+    this.position = { x: val, y: this.position.y };
+  }
+  public get y(): number { return this.position.y; }
+  public set y(val: number) {
+    this.position = { x: this.position.x, y: val; }
+  }
 
   public get size(): ISize { return {...this._size}; }
   public set size(size: ISize) {
     this._size = {...size};
     this._layout();
   }
-
-  public get width(): number { return this._size.width; }
+  public get width(): number { return this.size.width; }
   public set width(val: number) {
     this.size = { width: val, height: this.size.height };
   }
-
-  public get height(): number { return this._size.height; }
+  public get height(): number { return this.size.height; }
   public set height(val: number) {
     this.size = { width: this.size.width, height: val };
   }
