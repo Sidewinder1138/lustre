@@ -4,11 +4,13 @@ import { IPosition, ISize } from './Common';
 export abstract class Widget {
 
   private _parent: Widget;
+  private _children: Widget[] = [];
   private _pos: IPosition = { x: 0, y: 0 }; // _pos is relative to parent Widget
   private _absPos: IPosition = { x: 0, y: 0 };
   private _size: ISize = { width: 0, height: 0 };
 
   public getPosition(): IPosition { return {...this._pos}; }
+  public getAbsPosition(): IPosition { return {...this._absPos}; }
   public setPosition(pos: IPosition): Widget {
     this._pos = {...pos};
     this._absPos = this._pos;
@@ -27,22 +29,32 @@ export abstract class Widget {
     return this;
   }
 
-  // public addChild(child: Widget) {
-  //   child.move({
-  //     x: child._pos.x + this._pos.x,
-  //     y: child._pos.y + this._pos.y
-  //   });
-  //   this._addChild(child);
+  public addChild(child: Widget) {
 
-  //   return this;
-  // }
+    child._parent = this;
+    this._children.push(child);
+
+    const childOrigPos = {...child._pos};
+    //console.log('childOrigAbsPos', childOrigAbsPos);
+    // const relativePos = {
+    //   x: this._absPos.x - childOrigAbsPos.x,
+    //   y: this._absPos.y - childOrigAbsPos.y
+    // };
+    // console.log('relatiePos=', relativePos);
+    child.setPosition(childOrigPos);
+
+    this._addChild(child);
+
+    return this; //TODO: maybe return child instead?
+  }
 
   // ------------------------------------------------------------------------------------
   // Overridables:
   // ------------------------------------------------------------------------------------
-  protected abstract _getRoot(): svgjs.Element;
-  // protected abstract _resize(size: ISize): void;
-  protected _addChild(child: Widget): void {}
+  public abstract _getRoot(): svgjs.Element;
+  protected _addChild(child: Widget): void {
+    this._getRoot().add(child._getRoot());
+  }
   protected _layout(): void {}
 
 }

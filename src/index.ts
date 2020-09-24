@@ -41,20 +41,35 @@ const main = new Main();
 
 
 {
-  const boxParent = new Box().color('lightgreen')
+  const boxA = new Box()
+    .color('lightgreen')
     .setSize({ width: 280, height: 150 })
-    //.move({ x: 20, y: 250 });
-  main.addWidget(boxParent);
+  main.addWidget(boxA);
+
+  const boxB = new Box().color('green')
+    .setPosition({ x: 10, y: 20 });
+  boxA.addChild(boxB);
+
+
+  let animX = 20;
+  setInterval(() => {
+    boxA.setPosition({ x: animX, y: 30 });
+    animX += 1;
+    if (animX > 400) {
+      animX = 20;
+    }
+  }, 10);
+
 
   // const boxChild1 = new Box().color('blue')
   //   .size({ width: 50, height: 50 })
   //   .move({ x: 10, y: 10 });
   //   ;
   // boxParent.addChild(boxChild1);
-  
+
   // boxParent.position.x = 200;
   // console.log(boxParent.position);
-  
+
 
   //boxParent.move({ x: 20, y: 250 });
   //boxChild1.move({ x: 20, y: 20 });

@@ -32,15 +32,9 @@ export class Box extends Widget {
   }
 
   // ------------------------------------------------------------------------------------
-  // Widget overrides:
+  // Widget Overridables:
   // ------------------------------------------------------------------------------------
-  protected _getRoot(): svgjs.Element { return this._root; }
-
-
-
-  // protected _addChild(child: Widget): void {
-  //   this._root.add(child._getRoot());
-  // }
+  public _getRoot(): svgjs.Element { return this._root; }
 
   protected _layout(): void {
     this._bg.size(
@@ -48,7 +42,9 @@ export class Box extends Widget {
       this.getSize().height
     );
     this._root.move(
-      this.
-    )
+      this.getAbsPosition().x,
+      this.getAbsPosition().y
+    );
   }
+
 }
