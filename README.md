@@ -1,27 +1,24 @@
-# webplay
-Playing around with interesting web UI ideas.
+# Lustre UI
+A UI framework for the Web based around SVG and TypeScript.
 
-## Build Web UIs with SVG
-I want to try using SVG elements as the basis for constructing web UIs, instead
-of the traditional HTML/CSS approach.
+Lustre allows you to construct rich interactive user interfaces for the Web using nothing but a simple collection of TypeScript classes. Behind the scenes Lustre renders your UI using SVG, taking advantage of the browser's existing capability for rendering vector graphics efficiently.
 
-I'll be using TypeScript to manipulate the SVG elements, and any DOM elements as well.
+Traditional HTML/CSS content can be "embedded" into Lustre widgets if desired, so you can still use more "common" methods for parts of your UI.
 
-I'll be embedding snippets of HTML/CSS content inside SVG elements via the
-<foreignObject> SVG element, that way for "regular" textual content we can use
-traditional techniques.
+Lustre is meant for people who are tired of shoehorning HTML/CSS into doing things they were never meant to do.
 
-I'm going to try and use rxjs Observables to get that sweet functional event/async
-handling.
+# Technologies
+Lustre relies on and embraces:
 
-Considering exploring TypeScript's support for JSX (.tsx files)... could use this
-to allow user to more easily stuff HTML into the SVG-based UI...
+* TypeScript
+* SVG
+* RxJS (Observables)
 
 # Usage
 $ npm install
 
-In one tab do:
+To compile in "watch" mode do:
 $ npm run watch
 
-In another tab do:
+And then in another tab, serve up the app:
 $ npm run serve
