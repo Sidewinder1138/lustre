@@ -7,6 +7,15 @@ Traditional HTML/CSS content can be "embedded" into Lustre widgets if desired, s
 
 Lustre is meant for people who are tired of shoehorning HTML/CSS into doing things they were never meant to do.
 
+# Usage
+`$ npm install`
+
+To compile in "watch" mode do:
+`$ npm run watch`
+
+And then in another tab, serve up the app:
+`$ npm run serve`
+
 # Technologies
 Lustre relies on and embraces:
 
@@ -26,11 +35,3 @@ Here's some possible objections:
   * The performance will be terrible - Response: I'm not at all convinced, SVG renders very fast. However, we will be benchmarking and optimizing like crazy where needed.
   * It's just not "the right way" to do things - Response: The "right" way is whichever way works best, and this project is attempting to show at least a possible new "right" way to do things in the crazy turbulent world for Web front-end.
   
-# Usage
-`$ npm install`
-
-To compile in "watch" mode do:
-`$ npm run watch`
-
-And then in another tab, serve up the app:
-`$ npm run serve`
