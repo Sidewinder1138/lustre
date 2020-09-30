@@ -7,6 +7,20 @@ export class Page1 extends Page {
   constructor() {
     super();
 
+    {
+      let box = new Box();
+      this.add(box);
+      box.position = { x: 200, y: 350 };
+      box.width = 300;
+      box.height = 300;
+
+      let btn = new Button();
+      box.add(btn);
+      btn.click.subscribe(() => {
+        btn.label = 'Woah!'; // TODO: BUG: button dissapears!!!!
+      })
+    }
+
     // Boxes
     {
       let x = 20;
