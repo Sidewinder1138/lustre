@@ -6,7 +6,7 @@ export abstract class Widget {
   private _parent: Widget;
   private _children: Widget[] = [];
 
-  private _pos: IPosition = { x: 0, y: 0 };
+  protected _pos: IPosition = { x: 0, y: 0 };
   protected _size: ISize = { width: 0, height: 0 };
 
   protected _group: svgjs.G;
