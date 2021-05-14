@@ -8,8 +8,8 @@ export class Main extends Box {
   constructor() {
     super();
 
-    const mainWidth = 640;
-    const mainHeight = 480;
+    const mainWidth = 800;
+    const mainHeight = 800;
 
     const svgRoot = svgjs.SVG().addTo('body');
     svgRoot.size(mainWidth, mainHeight);
@@ -17,43 +17,7 @@ export class Main extends Box {
 
     this.size = { width: mainWidth, height: mainHeight }
     this.color = '#333';
-    
-    // Play with some widgets:
-    const btn = new Button();
-    this.add(btn);
-    btn.position = { x: 50, y: 50 };
-    btn.click.subscribe(() => {
-      console.log('Heyo!');
-    });
-
-
-
-    const b = new Box();
-    b.width = 100;
-    b.height = 100;
-    b.color = 'cornflowerblue';
-    this.add(b);
-    b.x = 50;
-    b.y = 200;
-
-    const b2 = new Box();
-    b.add(b2);
-    b2.width = 60;
-    b2.height = 40;
-    b2.x = 15;
-    b2.y = 15;
-    b2.color = 'pink';
-    
-    const b3 = new Box();
-    b2.add(b3);
-    b3.width = 10;
-    b3.height = 10;
-    b3.color = 'red';
-    b3.x = 20;
-    b3.y = 10;
-
-    
-    
+   
   }
 }
 
