@@ -51,6 +51,8 @@ export class Main extends Box {
     b3.color = 'red';
     b3.x = 20;
     b3.y = 10;
+
+    
     
   }
 }

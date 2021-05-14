@@ -8,6 +8,7 @@ export abstract class Widget {
 
   protected _pos: IPosition = { x: 0, y: 0 };
   protected _size: ISize = { width: 0, height: 0 };
+  private _visible = true;
 
   protected _group: svgjs.G;
 
@@ -19,6 +20,12 @@ export abstract class Widget {
     if (freeze) {
       this.freeze();
     }
+  }
+
+  public get visible(): boolean { return this._visible; }
+  public set visible(val: boolean) {
+    this._visible = val;
+    this._visible ? this._group.show() : this._group.hide();
   }
 
   public get position(): IPosition { return {...this._pos}; }
