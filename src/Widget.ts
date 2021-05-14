@@ -11,8 +11,14 @@ export abstract class Widget {
 
   protected _group: svgjs.G;
 
-  constructor() {
+  private _frozen = false;
+  private _needsLayout = false;
+
+  constructor(freeze = false) {
     this._group = new svgjs.G();
+    if (freeze) {
+      this.freeze();
+    }
   }
 
   public get position(): IPosition { return {...this._pos}; }
@@ -50,7 +56,25 @@ export abstract class Widget {
     this._layout();
   }
 
-  private _layout() {
+  public freeze() {
+    this._frozen = true;
+    this._needsLayout = false;
+  }
+
+  public unfreeze() {
+    this._frozen = false;
+    if (this._needsLayout) {
+      this._needsLayout = false;
+      this._layout();
+    }
+  }
+
+  protected _layout() {
+    if (this._frozen) {
+      this._needsLayout = true;
+      return;
+    } 
+
     this._group.css(
       'transform',
       `translate(${this._pos.x}px, ${this._pos.y}px)`

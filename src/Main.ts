@@ -1,5 +1,6 @@
 import * as svgjs from '@svgdotjs/svg.js';
 import { Box } from './Box';
+import { Button } from './Button';
 import { Widget } from './Widget';
 
 export class Main extends Box {
@@ -18,13 +19,22 @@ export class Main extends Box {
     this.color = '#333';
     
     // Play with some widgets:
+    const btn = new Button();
+    this.add(btn);
+    btn.position = { x: 50, y: 50 };
+    btn.click.subscribe(() => {
+      console.log('Heyo!');
+    });
+
+
+
     const b = new Box();
     b.width = 100;
     b.height = 100;
     b.color = 'cornflowerblue';
     this.add(b);
     b.x = 50;
-    b.y = 50;
+    b.y = 200;
 
     const b2 = new Box();
     b.add(b2);
