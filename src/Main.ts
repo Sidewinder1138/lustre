@@ -1,7 +1,8 @@
 import * as svgjs from '@svgdotjs/svg.js';
 import { Box } from './Box';
 import { Button } from './Button';
-import { Widget } from './Widget';
+import { Page1 } from './Page1';
+import { Page2 } from './Page2';
 
 export class Main extends Box {
 
@@ -14,42 +15,31 @@ export class Main extends Box {
     const svgRoot = svgjs.SVG().addTo('body');
     svgRoot.size(mainWidth, mainHeight);
     svgRoot.add(this._group);
-
     this.size = { width: mainWidth, height: mainHeight }
     this.color = '#333';
-   
+
+
+    const pages: Box[] = [];
+
+    let pos = { x: 10, y: 60 };
+    let page = new Page1(); this.add(page); pages.push(page); page.position = pos;
+    page = new Page2(); this.add(page); pages.push(page); page.position = pos;
+
+    pos = { x: 10, y: 10 };
+    let btnPage1 = null;
+    for (let index = 0; index < pages.length; index++) {
+      let btn = new Button(); this.add(btn);
+      if (!btnPage1) { btnPage1 = btn; }
+      btn.label = `Page ${index + 1}`;
+      btn.position = pos;
+      btn.click.subscribe(() => {
+        for (const page of pages) {
+          page.visible = false;
+        }
+        pages[index].visible = true;
+      });
+      pos.x += btn.width + 10;
+    }
+    btnPage1.doClick();
   }
 }
-
-
-// function component() {
-//   const element = document.createElement('div');
-//   const btn = document.createElement('button');
-//   element.innerHTML = _.join(['Hello', 'webpack', 'chris'], ' ');
-//   btn.innerHTML = 'Click me and check the console!';
-//   btn.onclick = printMe;
-//   element.appendChild(btn);
-//   return element;
-// }
-// document.body.appendChild(component());
-
-
-
-
-//TODO: move to Html class
-// let fo = (this._root as any).foreignObject(400, 400);
-// const div = document.createElement('div');
-// div.innerHTML = '<h1>HTML Content</h1><span>This is <b>cool</b> dude!</span>';
-// fo.add(div);
-// fo.move(800, 550);
-// fo.css('color', 'white');
-// fo.css('font-family', 'sans-serif');
-
-// let fo2 = (this._root as any).foreignObject(400, 400);
-// const div2 = document.createElement('div');
-// div2.innerHTML = '<h1>Other Content</h1>';
-// fo2.add(div2);
-// fo2.move(810, 560);
-// fo2.css('color', 'gray');
-// fo2.css('font-family', 'sans-serif');
-
