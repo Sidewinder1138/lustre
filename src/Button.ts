@@ -85,7 +85,8 @@ export class Button extends Widget {
   // ------------------------------------------------------------------------------------
   public _getRoot(): svgjs.Element { return this._root; }
 
-  protected _layout() {
+  public _layout() {
+    console.log(`absPos: ${this.absPosition.x},${this.absPosition.y}`);
     this._root.move(this.absPosition.x, this.absPosition.y);
     this._bg.size(this.size.width, this.size.height);
     this._overlay.size(this.size.width, this.size.height);

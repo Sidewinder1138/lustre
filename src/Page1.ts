@@ -17,8 +17,10 @@ export class Page1 extends Page {
       let btn = new Button();
       box.add(btn);
       btn.click.subscribe(() => {
-        btn.label = 'Woah!'; // TODO: BUG: button dissapears!!!!
-      })
+        btn._layout();
+        console.log('Bam!');
+        //btn.label = 'Woah!'; // TODO: BUG: button dissapears!!!!
+      });
     }
 
     // Boxes
