@@ -7,7 +7,13 @@ export abstract class Widget {
   private _children: Widget[] = [];
 
   private _pos: IPosition = { x: 0, y: 0 };
-  private _size: ISize = { width: 0, height: 0 };
+  protected _size: ISize = { width: 0, height: 0 };
+
+  protected _group: svgjs.G;
+
+  constructor() {
+    this._group = new svgjs.G();
+  }
 
   public get position(): IPosition { return {...this._pos}; }
   public set position(pos: IPosition) {
@@ -37,19 +43,24 @@ export abstract class Widget {
     this.size = { width: this.size.width, height: val };
   }
 
+  public add(child: Widget): void {
+    child._parent = this;
+    this._children.push(child);
+    this._group.add(child._group);
+    this._layout();
+  }
+
   private _layout() {
-    this._root().css(
+    this._group.css(
       'transform',
       `translate(${this._pos.x}px, ${this._pos.y}px)`
     );
-    this._root().size(this._size.width, this._size.height);
     this._layoutSelf();
-  }
 
-  // ------------------------------------------------------------------------------------
-  // Required Overrides:
-  // ------------------------------------------------------------------------------------
-  protected abstract _root(): svgjs.Element;
+    for (const child of this._children) {
+      child._layout();
+    }
+  }
 
   // ------------------------------------------------------------------------------------
   // Optional Overrides:
