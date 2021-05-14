@@ -1,11 +1,14 @@
 import * as svgjs from '@svgdotjs/svg.js';
 import { Widget } from './Widget';
-import { Widget2 } from './Widget2';
 
-export class Main extends Widget2 {
+export class Main extends Widget {
+
+  protected _root(): svgjs.Element {
+    return this._bg;
+  }
 
   //private _root: svgjs.Svg;
-  //private _bg: svgjs.Rect; //TODO: can probably just have user use a Box, or make Main inherit from Box?
+  private _bg: svgjs.Rect; //TODO: can probably just have user use a Box, or make Main inherit from Box?
 
   constructor() {
     super();
@@ -16,49 +19,10 @@ export class Main extends Widget2 {
     let svgRoot = svgjs.SVG().addTo('body');
     svgRoot.size(mainWidth, mainHeight);
 
-    //let bgRect = new svgjs.Rect();
-    //bgRect.size(mainWidth, mainHeight);
-    //bgRect.fill('#333');
-    svgRoot.add(this.__getRoot());
-    this.bgColor = '#333';
-    this.size = { width: mainWidth, height: mainHeight };
-
-
-
-   
-
-    // const g = new svgjs.G();
-    // svgRoot.add(g);
-    // const b = new svgjs.Rect().fill('#ff0000');
-    // g.add(b);
-    // b.size(50, 25);
-    // b.size(100, 25);
-    // g.css('transform' , 'translate(10px, 10px)');    
-
-
-
-
-    let w = new Widget2();
-    w.bgColor = 'hsl(210, 100%, 60%)';
-    w.x = 10;
-    w.y = 10;
-    w.size = { width: 120, height: 80 };
-    this.add(w);
-
-    let w2 = new Widget2();
-    w.add(w2);
-    w2.bgColor = 'red';
-    w2.size = { width: 50, height: 50 };
-    w2.x = 15;
-    w2.y = 15;
-
-    let w3 = new Widget2();
-    w2.add(w3);
-    w3.size = { width: 15, height: 15 };
-    w3.bgColor = '#0aa';
-    w3.x = 5;
-    w3.y = 5;
-    
+    this._bg = new svgjs.Rect();
+    this._bg.size(mainWidth, mainHeight);
+    this._bg.fill('#333');
+    svgRoot.add(this._bg);
     
     
     
@@ -66,6 +30,9 @@ export class Main extends Widget2 {
     
 
   }
+
+
+
 
   // ------------------------------------------------------------------------------------
   // Widget Overrides:

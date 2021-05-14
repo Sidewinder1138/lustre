@@ -1,8 +1,8 @@
 import { Main } from "./Main";
-import { Box } from "./Box";
-import { Button } from "./Button";
-import { Page1 } from "./Page1";
-import { Page2 } from "./Page2";
+//import { Box } from "./Box";
+//import { Button } from "./Button";
+//import { Page1 } from "./Page1";
+//import { Page2 } from "./Page2";
 
 const main = new Main();
 
